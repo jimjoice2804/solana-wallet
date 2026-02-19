@@ -1,5 +1,4 @@
-import { createContext, useState, type ReactNode } from 'react';
-import { type WalletContextType } from '@/types/WalletContextType';
+import { useState, type ReactNode } from 'react';
 import {
   generateNewWallet,
   recoverKeyFromMnemonic,
@@ -7,8 +6,7 @@ import {
 } from '@/services/walletService';
 import { Keypair } from '@solana/web3.js';
 import { getBalance } from '@/services/balanceService';
-
-const WalletContext = createContext<WalletContextType | null>(null);
+import { WalletContext } from '@/context/walletContext';
 
 export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [wallet, setWallet] = useState<Keypair | null>(null);
