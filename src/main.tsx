@@ -1,4 +1,5 @@
 import { Buffer } from 'buffer';
+import { BrowserRouter } from 'react-router-dom';
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -11,8 +12,10 @@ import { WalletProvider } from './context/WalletContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <WalletProvider>
-      <App />
-    </WalletProvider>
+    <BrowserRouter>
+      <WalletProvider>
+        <App />
+      </WalletProvider>
+    </BrowserRouter>
   </StrictMode>,
 );
