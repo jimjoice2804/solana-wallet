@@ -1,6 +1,13 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Welcome from '@components/Welcome';
+import {
+  Welcome,
+  CreateWallet,
+  Dashboard,
+  Send,
+  Receive,
+  ImportWallet,
+} from '@components/index';
 
 function App() {
   return (
@@ -8,6 +15,11 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Welcome />} />
+          <Route path="/create" element={<CreateWallet />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/send" element={<Send />} />
+          <Route path="/receive" element={<Receive />} />
+          <Route path="/import" element={<ImportWallet />} />
         </Routes>
       </div>
     </>
