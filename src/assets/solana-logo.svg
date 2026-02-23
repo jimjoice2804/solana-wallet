@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="solanaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="50%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <radialGradient id="bubbleGrad" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 0.3)" />
+      <stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" />
+      <stop offset="80%" stop-color="rgba(192, 132, 252, 0.15)" />
+      <stop offset="100%" stop-color="rgba(34, 211, 238, 0.3)" />
+    </radialGradient>
+
+    <linearGradient id="bubbleBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#22d3ee" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="250" cy="250" r="220" fill="url(#bubbleGrad)" stroke="url(#bubbleBorder)" stroke-width="3" />
+
+  <circle cx="250" cy="250" r="217" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+
+  <ellipse cx="250" cy="90" rx="110" ry="35" fill="rgba(255, 255, 255, 0.2)" filter="blur(1px)" />
+  
+  <g transform="translate(130, 155) scale(0.6)">
+    <path d="M62.685 0H397l-62.685 99H0L62.685 0z" fill="url(#solanaGrad)" />
+    <path d="M334.315 106H0l62.685 99H397l-62.685-99z" fill="url(#solanaGrad)" />
+    <path d="M62.685 212H397l-62.685 99H0l62.685-99z" fill="url(#solanaGrad)" />
+  </g>
+  
+  <path d="M 90 380 Q 250 470 410 380 Q 250 440 90 380 Z" fill="rgba(34, 211, 238, 0.15)" />
+</svg>

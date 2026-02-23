@@ -1,5 +1,9 @@
 const CreateWallet = () => {
-  return <div>CreateWallet</div>;
+  return (
+    <>
+      <div>Create Wallet</div>
+    </>
+  );
 };
 
 export default CreateWallet;
