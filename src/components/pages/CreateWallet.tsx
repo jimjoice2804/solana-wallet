@@ -1,11 +1,13 @@
 import { useWallet } from '@/hooks/useWallet';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import Button from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const CreateWallet = () => {
   const { copied, copy } = useCopyToClipboard();
   const { mnemonic } = useWallet();
 
+  const navigate = useNavigate();
   if (mnemonic === null) {
     console.log('mnemonic is null ');
     return;
@@ -45,7 +47,10 @@ const CreateWallet = () => {
           {
             <Button
               style="mt-2 px-6 py-2 rounded-xl bg-white/10 border border-white/20 text-sm text-white hover:bg-white/20 transition-colors"
-              onClick={() => copy(mnemonic)}
+              onClick={() => {
+                copy(mnemonic);
+                navigate('/dashboard');
+              }}
             >
               {copied ? 'Copied!' : 'Copy Seed Phrase'}
             </Button>
