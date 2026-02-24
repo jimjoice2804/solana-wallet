@@ -7,6 +7,7 @@ import {
   Send,
   Receive,
   ImportWallet,
+  Buy,
 } from '@/components/pages/index';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/send" element={<Send />} />
             <Route path="/receive" element={<Receive />} />
             <Route path="/import" element={<ImportWallet />} />
+            <Route path="/buy" element={<Buy />} />
           </Routes>
         </div>
       </div>
