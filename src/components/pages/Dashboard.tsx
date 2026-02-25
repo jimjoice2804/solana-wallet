@@ -1,16 +1,20 @@
 import { useBalance } from '@/hooks/useBalance';
 import { useWallet } from '@/hooks/useWallet';
 import { useNavigate } from 'react-router-dom';
+import ClipboardIcon from '@components/ui/ClipboardIcon';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 
 const Dashboard = () => {
   const { publicKey } = useWallet();
   const { isLoading, data, error } = useBalance(publicKey);
   const navigate = useNavigate();
+  const { copy } = useCopyToClipboard();
+  if (!publicKey) return <div>No publicKey is present</div>;
   if (error) {
     return <div>Something Went wrong while fetching SOL</div>;
   }
+  console.log(data, 'data');
 
-  console.log(data);
   return (
     <>
       {isLoading ? (
@@ -26,8 +30,11 @@ const Dashboard = () => {
             <span className="text-white/60 text-xs font-mono truncate max-w-[80%]">
               {publicKey}
             </span>
-            <button className="text-white/40 hover:text-white text-xs ml-2 transition-colors">
-              ⎘
+            <button
+              className="text-white/40 hover:text-white text-xs ml-2 transition-colors"
+              onClick={() => copy(publicKey)}
+            >
+              <ClipboardIcon size={25} />
             </button>
           </div>
 

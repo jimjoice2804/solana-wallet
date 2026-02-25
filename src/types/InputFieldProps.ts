@@ -1,7 +1,6 @@
 export interface ImportFieldProps {
     placeholder: string,
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
-    value: string,
+    value: string | number,
     style: string
-    type?: string
 }
