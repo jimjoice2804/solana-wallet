@@ -1,8 +1,8 @@
-import { Keypair } from "@solana/web3.js"
+import { Keypair, PublicKey } from "@solana/web3.js"
 
 export interface WalletContextType {
     wallet: Keypair | null
-    publicKey: string | null
+    publicKey: PublicKey | null
     mnemonic: string | null
     balance: number
     network: 'devnet' | 'mainnet-beta'
