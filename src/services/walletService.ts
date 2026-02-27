@@ -23,6 +23,7 @@ export const generateNewWallet = () => {
     const publicKey = keyPair.publicKey.toBase58();
     const privateKey = bs58.encode(keyPair.secretKey)
 
+
     return {
         keyPair,
         publicKey,
