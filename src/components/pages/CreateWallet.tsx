@@ -1,6 +1,6 @@
 import { useWallet } from '@/hooks/useWallet';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-import Button from '../ui/Button';
+import Button from '@components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 
 const CreateWallet = () => {

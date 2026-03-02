@@ -1,5 +1,5 @@
 import { requestAirdrop } from "@/services/requestAirDropService";
-import type { PublicKey } from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 import { useState } from "react"
 
 export const useAirdrop = () => {
@@ -7,10 +7,11 @@ export const useAirdrop = () => {
     const [err, setErr] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    async function makeTransaction(publicAddress: PublicKey, airDropAmount: number) {
+    async function makeTransaction(publicAddress: string, airDropAmount: number) {
         try {
             setLoading(true)
-            const value = await requestAirdrop(publicAddress, airDropAmount);
+            const pubKey = new PublicKey(publicAddress)
+            const value = await requestAirdrop(pubKey, airDropAmount);
             setData(value);
             setLoading(false)
         } catch (error) {
