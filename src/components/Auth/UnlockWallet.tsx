@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '@components/ui/Button';
 import { decryptPrivateKey } from '@/utils/cryptoService';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useWallet } from '@/hooks/useWallet';
 import { Keypair } from '@solana/web3.js';
 
@@ -11,7 +11,7 @@ const UnlockWallet = () => {
   const { unlock } = useWallet();
   const navigate = useNavigate();
   const encryptedPackage = localStorage.getItem('encryptedKey');
-  if (encryptedPackage == null) return <div>Package is Missing</div>;
+  if (encryptedPackage == null) return <Navigate to="/import" />;
   if (err) return <div>{err}</div>;
   return (
     <div className="flex flex-col items-center justify-center p-6 w-full h-full">

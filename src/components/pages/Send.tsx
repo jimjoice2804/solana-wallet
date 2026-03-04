@@ -47,13 +47,13 @@ const Send = () => {
               </div>
               <div>
                 <Button
-                  onClick={() => {
+                  onClick={async () => {
                     if (!toAddress || amount === 0)
                       return alert(
                         "No Address is found or amount can't be zero",
                       );
                     try {
-                      SOLTransaction(wallet, toAddress, Number(amount));
+                      await SOLTransaction(wallet, toAddress, Number(amount));
                       lock();
                     } catch (error) {
                       console.error(error);

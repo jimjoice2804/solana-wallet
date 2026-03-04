@@ -66,7 +66,10 @@ const ImportWallet = () => {
                 placeholder="Enter your base58 Private Key..."
                 style="w-full min-h-[120px] p-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 text-sm resize-none outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/30 transition-all font-mono break-all"
                 value={privateKey}
-                onChange={(e) => setPrivateKey(e.target.value)}
+                onChange={(e) => {
+                  setPrivateKey(e.target.value);
+                  setImportErr(null);
+                }}
               />
             </div>
           )}
