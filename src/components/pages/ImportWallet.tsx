@@ -2,14 +2,16 @@ import { useState } from 'react';
 import InputField from '../ui/InputField';
 import Button from '../ui/Button';
 import { useWallet } from '@/hooks/useWallet';
+import { SetPassword } from '@components/Auth/SetPassword';
 
 const ImportWallet = () => {
   const { importFromMnemonic, importFromKey } = useWallet();
   const [showSecretInputBox, setShowSecretInputBox] = useState(true);
   const [secretPhrase, setSecretPhrase] = useState('');
   const [privateKey, setPrivateKey] = useState('');
-  if (secretPhrase === null) return;
-
+  const [step, setStep] = useState<1 | 2>(1);
+  const [importErr, setImportErr] = useState<string | null>(null);
+  if (step == 2) return <SetPassword />;
   return (
     <>
       <div className="w-full h-150 flex flex-col justify-center items-center px-6">
@@ -69,16 +71,41 @@ const ImportWallet = () => {
             </div>
           )}
 
+          {importErr && (
+            <div className="text-red-400 text-sm text-center bg-red-400/10 py-2 px-3 rounded-lg border border-red-400/20">
+              {importErr}
+            </div>
+          )}
+
           {/* Import Button */}
           <Button
             style="mt-4 w-full py-4 px-6 rounded-2xl font-semibold text-white cursor-pointer bg-gradient-to-r from-green-400 to-purple-500 hover:opacity-90 transition-opacity"
             onClick={() => {
               if (showSecretInputBox) {
-                importFromMnemonic(secretPhrase);
+                try {
+                  importFromMnemonic(secretPhrase);
+                  setStep(2);
+                } catch (error) {
+                  setImportErr(
+                    error instanceof Error
+                      ? error.message
+                      : 'Failed to import using Mnemonic phrase',
+                  );
+                  console.error(error);
+                }
               } else {
-                importFromKey(privateKey);
+                try {
+                  importFromKey(privateKey);
+                  setStep(2);
+                } catch (error) {
+                  setImportErr(
+                    error instanceof Error
+                      ? error.message
+                      : 'Failed to import using Private Key',
+                  );
+                  console.error(error);
+                }
               }
-              // navigate('/dashboard');
             }}
           >
             Import Wallet

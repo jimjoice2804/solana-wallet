@@ -44,12 +44,20 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     setBalance(SOLbalance);
   };
 
+  const unlock = (keyPair: Keypair) => {
+    setWallet(keyPair);
+  };
+
   const logout = () => {
     setWallet(null);
     setPublicKey(null);
     setMnemonic(null);
     setBalance(0);
     localStorage.clear();
+  };
+
+  const lock = () => {
+    setWallet(null);
   };
 
   return (
@@ -65,6 +73,8 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         importFromKey,
         refreshBalance,
         logout,
+        unlock,
+        lock,
       }}
     >
       {children}

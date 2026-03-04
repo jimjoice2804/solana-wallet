@@ -1,19 +1,21 @@
 import { useWallet } from '@/hooks/useWallet';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import Button from '@components/ui/Button';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { SetPassword } from '@components/Auth/SetPassword';
 
 const CreateWallet = () => {
   const { copied, copy } = useCopyToClipboard();
   const { mnemonic } = useWallet();
+  const [step, setStep] = useState<1 | 2>(1);
 
-  const navigate = useNavigate();
   if (mnemonic === null) {
     console.log('mnemonic is null ');
     return;
   }
   const words = mnemonic.split(' ');
 
+  if (step === 2) return <SetPassword />;
   return (
     <>
       <div className="flex flex-col justify-center items-center h-full w-full">
@@ -49,7 +51,7 @@ const CreateWallet = () => {
               style="mt-2 px-6 py-2 rounded-xl bg-white/10 border border-white/20 text-sm text-white hover:bg-white/20 transition-colors"
               onClick={() => {
                 copy(mnemonic);
-                navigate('/dashboard');
+                setStep(2);
               }}
             >
               {copied ? 'Copied!' : 'Copy Seed Phrase'}

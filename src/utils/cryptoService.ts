@@ -41,25 +41,30 @@ export const decryptPrivateKey = async (encrypted: string, password: string): Pr
     const iv = bytes.slice(16, 28);
     const ciphertext = bytes.slice(28)
 
-    const baseKey = await crypto.subtle.importKey(
-        "raw", encPassword, "PBKDF2", false, ["deriveKey"]
-    )
+    try {
+        const baseKey = await crypto.subtle.importKey(
+            "raw", encPassword, "PBKDF2", false, ["deriveKey"]
+        )
 
-    const aesKey = await crypto.subtle.deriveKey({
-        name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256"
-    },
-        baseKey,
-        { name: "AES-GCM", length: 256 },
-        false,
-        ["decrypt"]
-    )
+        const aesKey = await crypto.subtle.deriveKey({
+            name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256"
+        },
+            baseKey,
+            { name: "AES-GCM", length: 256 },
+            false,
+            ["decrypt"]
+        )
 
-    const decrypted = await crypto.subtle.decrypt({
-        name: "AES-GCM", iv
-    },
-        aesKey,
-        ciphertext
-    )
+        const decrypted = await crypto.subtle.decrypt({
+            name: "AES-GCM", iv
+        },
+            aesKey,
+            ciphertext
+        )
 
-    return new Uint8Array(decrypted);
+        return new Uint8Array(decrypted);
+    } catch (error) {
+        console.error(error)
+        throw new Error("Failed to DecryptKey", { cause: error })
+    }
 }
