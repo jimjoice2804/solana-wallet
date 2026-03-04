@@ -11,4 +11,6 @@ export interface WalletContextType {
     importFromKey: (key: string) => void
     refreshBalance: (publicKey: string) => Promise<void>
     logout: () => void
+    unlock: (wallet: Keypair) => void
+    lock: () => void
 }

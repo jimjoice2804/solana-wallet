@@ -3,13 +3,14 @@ import InputField from '../ui/InputField';
 import Button from '../ui/Button';
 import { useTransaction } from '@/hooks/useTransaction';
 import { useWallet } from '@/hooks/useWallet';
+import UnlockWallet from '@components/Auth/UnlockWallet';
 
 const Send = () => {
-  const { wallet } = useWallet();
+  const { wallet, lock } = useWallet();
   const { isLoading, error, SOLTransaction } = useTransaction();
   const [toAddress, setToAddress] = useState('');
   const [amount, setAmount] = useState<number>(0);
-  if (wallet === null) return <div>No KeyPair found</div>;
+  if (!wallet) return <UnlockWallet />;
   if (error) return <div>{error}</div>;
   return (
     <>
@@ -51,7 +52,12 @@ const Send = () => {
                       return alert(
                         "No Address is found or amount can't be zero",
                       );
-                    SOLTransaction(wallet, toAddress, Number(amount));
+                    try {
+                      SOLTransaction(wallet, toAddress, Number(amount));
+                      lock();
+                    } catch (error) {
+                      console.error(error);
+                    }
                   }}
                   style="w-full p-4 mt-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-lg hover:opacity-90 transition-all hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] active:scale-[0.98]"
                 >
