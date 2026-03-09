@@ -9,7 +9,11 @@ const Dashboard = () => {
   const { isLoading, data, error } = useBalance(publicKey);
   const navigate = useNavigate();
   const { copy } = useCopyToClipboard();
-  if (!publicKey) return <div>No publicKey is present</div>;
+  const isPubKey = localStorage.getItem('publickey');
+  if (!isPubKey) {
+    navigate('/');
+    return null;
+  }
   if (error) {
     return <div>Something Went wrong while fetching SOL</div>;
   }
@@ -32,7 +36,7 @@ const Dashboard = () => {
             </span>
             <button
               className="text-white/40 hover:text-white text-xs ml-2 transition-colors"
-              onClick={() => copy(publicKey)}
+              onClick={() => copy(publicKey ?? isPubKey)}
             >
               <ClipboardIcon size={25} />
             </button>

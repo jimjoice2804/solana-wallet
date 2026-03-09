@@ -5,7 +5,6 @@ import { useState } from 'react';
 const Buy = () => {
   const { publicKey } = useWallet();
   const { makeTransaction, err, loading } = useAirdrop();
-
   // Default selection to 1 SOL
   const [amount, setAmount] = useState<number>(1);
   const airdropAmount = [0.5, 1, 2, 5];
@@ -63,7 +62,13 @@ const Buy = () => {
 
           {/* Action Button */}
           <button
-            onClick={() => makeTransaction(publicKey, amount)}
+            onClick={async () => {
+              try {
+                await makeTransaction(publicKey, amount);
+              } catch (error) {
+                console.error('Got an error', error);
+              }
+            }}
             className="w-full py-4 mt-8 rounded-2xl bg-linear-to-r from-purple-500 to-pink-500 text-white font-bold text-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)]"
           >
             Request Airdrop

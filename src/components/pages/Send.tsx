@@ -4,12 +4,14 @@ import Button from '../ui/Button';
 import { useTransaction } from '@/hooks/useTransaction';
 import { useWallet } from '@/hooks/useWallet';
 import UnlockWallet from '@components/Auth/UnlockWallet';
+import { useNavigate } from 'react-router-dom';
 
 const Send = () => {
   const { wallet, lock } = useWallet();
   const { isLoading, error, SOLTransaction } = useTransaction();
   const [toAddress, setToAddress] = useState('');
   const [amount, setAmount] = useState<number>(0);
+  const navigate = useNavigate();
   if (!wallet) return <UnlockWallet />;
   if (error) return <div>{error}</div>;
   return (
@@ -55,6 +57,8 @@ const Send = () => {
                     try {
                       await SOLTransaction(wallet, toAddress, Number(amount));
                       lock();
+                      alert('SOL sent successfully ✅');
+                      navigate('/dashboard');
                     } catch (error) {
                       console.error(error);
                     }

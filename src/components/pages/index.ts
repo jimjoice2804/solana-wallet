@@ -5,3 +5,5 @@ export { default as Receive } from "@/components/pages/Receive";
 export { default as Send } from "@/components/pages/Send";
 export { default as ImportWallet } from "@/components/pages/ImportWallet";
 export { default as Buy } from "@/components/pages/Buy";
+export { default as NotFoundPage } from "@/components/pages/NotFoundPage";
+export { default as Profile } from "@/components/pages/Profile"

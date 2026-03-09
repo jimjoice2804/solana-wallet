@@ -10,7 +10,7 @@ export const useAirdrop = () => {
     async function makeTransaction(publicAddress: string, airDropAmount: number) {
         try {
             setLoading(true)
-            const pubKey = new PublicKey(publicAddress)
+            const pubKey = new PublicKey(Number(publicAddress))
             const value = await requestAirdrop(pubKey, airDropAmount);
             setData(value);
             setLoading(false)
